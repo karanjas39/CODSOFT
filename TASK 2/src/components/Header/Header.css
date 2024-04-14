@@ -1,0 +1,48 @@
+.navbar {
+  color: var(--main);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--color1);
+  font-size: 18px;
+}
+
+.navbar div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.navbar img {
+  width: 40px;
+}
+
+.navbar button {
+  background-color: var(--color2);
+  padding: 10px 20px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.navbar button:hover {
+  opacity: 0.9;
+}
+
+@media screen and (max-width: 840px) {
+  .navbar {
+    font-size: 16px;
+    padding: 10px;
+  }
+  .navbar h2 {
+    font-size: 16px;
+  }
+  .navbar img {
+    width: 30px;
+  }
+  .navbar button {
+    padding: 8px 16px;
+  }
+}

@@ -1,0 +1,67 @@
+.task-container {
+  height: 300px;
+  overflow-y: scroll;
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 50px;
+  border: solid 2px var(--color2);
+  padding: 40px;
+  border-radius: 20px;
+  display: flex;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.add-task {
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 20px;
+}
+
+.add-task input {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+}
+
+.add-task button {
+  background-color: var(--color2);
+  padding: 10px 20px;
+  outline: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: max-content;
+}
+
+.add-task button:hover {
+  opacity: 0.9;
+}
+
+.salute {
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+@media screen and (max-width: 840px) {
+  .task-container,
+  .add-task {
+    width: 85%;
+  }
+
+  .task-container {
+    padding: 20px;
+  }
+
+  .add-task {
+    grid-template-columns: 1fr;
+  }
+}

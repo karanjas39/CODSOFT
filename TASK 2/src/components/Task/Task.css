@@ -1,0 +1,93 @@
+.task-template {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  background-color: var(--color1);
+  color: var(--main);
+  width: max-content;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 18px;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.047);
+}
+
+.task-temp-done {
+  opacity: 0.8;
+}
+
+.task-template > button,
+.update-task > button {
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+}
+
+.task-template .donebtn {
+  background-color: var(--green);
+  color: var(--color1);
+}
+.task-template .notdonebtn {
+  background-color: var(--red);
+  color: var(--color1);
+}
+
+.task-template > p {
+  font-weight: bold;
+}
+
+.task-template .taskdone {
+  text-decoration: line-through;
+  opacity: 0.8;
+}
+
+.task-template div {
+  display: flex;
+  gap: 5px;
+  font-size: 20px;
+}
+
+.task-template div p {
+  cursor: pointer;
+}
+
+.update-task {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 30%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  background-color: var(--color1);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.update-task > button {
+  background-color: var(--color2);
+  color: var(--main);
+  font-weight: bold;
+  width: max-content;
+}
+
+.update-task input {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  border: solid 1px var(--main);
+}
+
+@media screen and (max-width: 840px) {
+  .task-template {
+    padding: 5px 10px;
+    gap: 10px;
+  }
+  .update-task {
+    width: 90%;
+  }
+}
