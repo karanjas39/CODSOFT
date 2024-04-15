@@ -25,6 +25,7 @@ function App() {
 
   function handleAddTask(e) {
     e.preventDefault();
+    if (!newTask) return;
     setTasks((tasks) => [...tasks, { task: newTask, id: Date.now() }]);
     setNewTask("");
   }
