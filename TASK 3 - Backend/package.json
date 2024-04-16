@@ -1,0 +1,13 @@
+{
+  "name": "blogify_backend",
+  "version": "1.0.0",
+  "description": "This is the backend for the blogify - blog platform that is assigned as the task in codsoft internship.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "build": "npm install",
+    "prod": "node server.js"
+  },
+  "author": "Jaskaran Singh",
+  "license": "ISC"
+}
