@@ -1,5 +1,7 @@
 import "./Header.css";
 
+import { Link } from "react-router-dom";
+
 function Header() {
   return (
     <nav className="nav-bar">
@@ -9,7 +11,9 @@ function Header() {
       </h1>
       <div className="links">
         <a href="#">Contact Us</a>
-        <button>Login</button>
+        <Link to="login">
+          <button>Login</button>
+        </Link>
       </div>
     </nav>
   );
