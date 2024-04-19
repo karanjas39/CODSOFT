@@ -26,10 +26,12 @@ const schema = mongoose.Schema({
   resetPasswordToken: {
     type: String,
     default: "",
+    select: false,
   },
   resetPasswordExpiry: {
     type: Date,
     default: null,
+    select: false,
   },
   createdAt: {
     type: Date,

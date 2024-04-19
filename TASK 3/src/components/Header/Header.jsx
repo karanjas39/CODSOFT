@@ -13,7 +13,11 @@ function Header({ btnObj, links = [] }) {
       <div>
         <div className="links">
           {links.length != 0
-            ? links.map((el) => <Link to={el.path}>{el.text}</Link>)
+            ? links.map((el, i) => (
+                <Link to={el.path} key={i}>
+                  {el.text}
+                </Link>
+              ))
             : ""}
         </div>
         <Link to={btnObj.path}>

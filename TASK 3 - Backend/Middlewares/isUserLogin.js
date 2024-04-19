@@ -4,7 +4,6 @@ module.exports = { isUserLoggedIn };
 
 async function isUserLoggedIn(req, res, next) {
   try {
-    console.log(req.cookies.token);
     let token =
       req.cookies.token || req.headers.authorization.replace("Bearer ", "");
 

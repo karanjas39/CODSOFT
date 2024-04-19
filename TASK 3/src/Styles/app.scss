@@ -1,7 +1,7 @@
 @import "./color", "./media-queries";
 
 .app {
-  background-image: url("../../public/bg.svg");
+  background-image: url("/bg.svg");
   background-size: cover;
   width: 100%;
   display: flex;
