@@ -1,18 +1,23 @@
-import "./Header.css";
-
+import "../../Styles/header.scss";
 import { Link } from "react-router-dom";
 
-function Header() {
+function Header({ btnObj, links = [] }) {
   return (
     <nav className="nav-bar">
-      <h1>
-        <img src="/website-icon.png" alt="Web site icon" />
-        Blogify
-      </h1>
-      <div className="links">
-        <a href="#">Contact Us</a>
-        <Link to="login">
-          <button>Login</button>
+      <Link to="/">
+        <h1>
+          <img src="/website-icon.png" alt="Web site icon" />
+          Blogify
+        </h1>
+      </Link>
+      <div>
+        <div className="links">
+          {links.length != 0
+            ? links.map((el) => <Link to={el.path}>{el.text}</Link>)
+            : ""}
+        </div>
+        <Link to={btnObj.path}>
+          <button>{btnObj.text}</button>
         </Link>
       </div>
     </nav>

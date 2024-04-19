@@ -1,0 +1,72 @@
+@import "./color", "./media-queries";
+
+.login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 80%;
+  margin: 0 auto;
+
+  h2 {
+    color: $fff;
+    font-size: 36px;
+    margin-bottom: 30px;
+    span {
+      color: $color1;
+    }
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 30%;
+    height: 280px;
+
+    div {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      label {
+        font-weight: bold;
+        font-size: 18px;
+        color: $color1;
+      }
+      input {
+        padding: 12px;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        border: 1px solid $fff;
+      }
+    }
+    button {
+      margin-top: 20px;
+      width: max-content;
+    }
+
+    p {
+      font-size: 12px;
+      align-self: center;
+    }
+
+    div {
+      font-size: 14px;
+    }
+    @include tablet {
+      width: 80%;
+    }
+  }
+
+  > div {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    a {
+      color: $color1;
+    }
+  }
+}

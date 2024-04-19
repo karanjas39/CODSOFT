@@ -1,0 +1,11 @@
+@import "./color", "./login.scss";
+
+.register {
+  @extend .login;
+  form {
+    height: 440px;
+  }
+  > div {
+    margin-top: 20px;
+  }
+}

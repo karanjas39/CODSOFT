@@ -17,13 +17,18 @@ async function createUser(req, res) {
 
     const sanitizedEmail = email.toLowerCase();
 
-    const isUser = await User.findOne({ email: sanitizedEmail });
+    const isUser = await User.findOne({
+      $or: [{ username: username.toLowerCase() }, { email: sanitizedEmail }],
+    });
 
     if (isUser) {
       return res.send({
         success: false,
         status: 400,
-        message: "User with this email already exist.",
+        message:
+          email.toLowerCase() == isUser.email
+            ? "User with this email already exist."
+            : "User with this username already exist.",
       });
     }
 
@@ -98,11 +103,9 @@ async function loginUser(req, res) {
     res
       .cookie("token", token, {
         httpOnly: true,
-        secure: false,
-        sameSite: "none",
         expires: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000),
       })
-      .send({
+      .json({
         success: true,
         status: 200,
         token: token,
