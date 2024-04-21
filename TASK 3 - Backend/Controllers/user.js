@@ -76,9 +76,9 @@ async function loginUser(req, res) {
 
     const sanitizedEmail = !!email ? email.toLowerCase() : "";
 
-    const isUser = await User.findOne({
-      $or: [{ email: sanitizedEmail }, { username }],
-    }).select("+password");
+    const isUser = await User.findOne({ email: sanitizedEmail }).select(
+      "+password"
+    );
 
     if (!isUser) {
       return res.send({
