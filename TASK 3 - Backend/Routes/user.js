@@ -15,6 +15,7 @@ router.route("/user/details").get(isUserLoggedIn, userControllers.getUser);
 router.route("/blog/create").post(isUserLoggedIn, blogControllers.createBlog);
 router.route("/blog/delete").post(isUserLoggedIn, blogControllers.deleteBlog);
 router.route("/blog/update").post(isUserLoggedIn, blogControllers.updateBlog);
+router.route("/blog/all").get(blogControllers.getAllBlogs);
 router.route("/blog/details").get(blogControllers.getBlog);
 router
   .route("/user/blog/all")

@@ -1,7 +1,14 @@
 const Blog = require("../Modals/blog");
 const User = require("../Modals/user");
 
-module.exports = { createBlog, getUserBlogs, getBlog, deleteBlog, updateBlog };
+module.exports = {
+  createBlog,
+  getUserBlogs,
+  getBlog,
+  deleteBlog,
+  updateBlog,
+  getAllBlogs,
+};
 
 async function createBlog(req, res) {
   try {
@@ -184,6 +191,37 @@ async function updateBlog(req, res) {
       success: true,
       status: 200,
       message: "Blog is updated successfully.",
+    });
+  } catch (error) {
+    res.send({
+      success: false,
+      status: 500,
+      message: `Error: ${error.toString()}`,
+    });
+  }
+}
+
+async function getAllBlogs(req, res) {
+  try {
+    const blogs = await Blog.find()
+      .populate({
+        path: "createdBy",
+        select: "username -_id",
+      })
+      .select("-description -updatedAt");
+
+    if (blogs.length == 0) {
+      return res.send({
+        success: false,
+        status: 404,
+        message: "No blog is created yet. Be the one to create first blog.",
+      });
+    }
+
+    res.send({
+      success: true,
+      status: 200,
+      blogs,
     });
   } catch (error) {
     res.send({
