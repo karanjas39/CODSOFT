@@ -23,6 +23,14 @@ app.use(express.json({ limit: "12kb" }));
 app.use(express.urlencoded({ extended: true, limit: "12kb" }));
 app.use(cookieParser());
 
+app.route("/").get((req, res) => {
+  res.send({
+    success: true,
+    status: 200,
+    message: "This is the backend of Blogify - A Blogging Platform.",
+  });
+});
+
 // ROUTES
 app.use("/v1/api", cors(corsOptions), userRouter);
 
