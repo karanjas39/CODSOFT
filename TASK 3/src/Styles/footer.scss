@@ -1,0 +1,19 @@
+@import "./color";
+
+footer {
+  padding: 50px 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: $color1;
+  color: $main;
+
+  h2 {
+    font-size: 32px;
+  }
+  a {
+    color: $main;
+    font-weight: bold;
+  }
+}

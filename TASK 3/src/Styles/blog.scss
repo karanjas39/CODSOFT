@@ -101,7 +101,7 @@
 }
 
 .blogs-list-main {
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
   margin-top: 80px;
   h2 {
@@ -110,14 +110,13 @@
     font-size: 28px;
   }
   .list {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    align-items: flex-start;
-    gap: 20px;
+    display: flex;
+    align-content: flex-start;
+    gap: 30px;
     flex-wrap: wrap;
     margin-top: 10px;
     padding: 10px 0;
-    height: 300px;
+    height: 500px;
     overflow: scroll;
   }
 }

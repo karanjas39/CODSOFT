@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import "./Styles/app.scss";
 import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
 
-const links = [{ text: "Contact Us", path: "contact" }];
+const links = [{ text: "Explore Blogs", path: "/blogs" }];
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <img src="/content.png" alt="Hero section gif" />
         </div>
       </section>
+      <Footer />
     </>
   );
 }
