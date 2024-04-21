@@ -68,13 +68,16 @@ export async function handleLogin({ request }) {
   }
 
   try {
-    const response = await fetch("http://127.0.0.1:8080/v1/api/user/login", {
-      method: "POST",
-      body: JSON.stringify(bodyData),
-      headers: {
-        "Content-type": "application/json",
-      },
-    });
+    const response = await fetch(
+      "https://codsoft-x5ou.onrender.com/v1/api/user/login",
+      {
+        method: "POST",
+        body: JSON.stringify(bodyData),
+        headers: {
+          "Content-type": "application/json",
+        },
+      }
+    );
     const data = await response.json();
     if (data?.success == true) {
       sessionStorage.setItem("token", data.token);
