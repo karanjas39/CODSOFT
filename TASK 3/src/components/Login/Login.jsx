@@ -79,7 +79,7 @@ export async function handleLogin({ request }) {
     if (data?.success == true) {
       sessionStorage.setItem("token", data.token);
       // return redirect(`/dashboard/${data.token}`);
-      return redirect(`/dashboard`);
+      return redirect(`/dashboard/user`);
     }
     return { message: data.message };
   } catch (error) {

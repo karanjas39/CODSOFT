@@ -1,0 +1,107 @@
+@import "./color", "./login.scss";
+
+.recent-blogs {
+  width: 80%;
+  margin: 20px auto;
+  .list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: flex-start;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    padding: 10px 0;
+    height: 300px;
+    overflow: scroll;
+  }
+}
+
+.blog {
+  padding: 20px;
+  border: solid 1px $color1;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  > .btns {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    h3 {
+      font-size: 24px;
+      color: $color1;
+    }
+    p {
+      font-size: 12px;
+      font-weight: bold;
+    }
+  }
+
+  > p {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+}
+
+.blog-view {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  h2 {
+    font-size: 28px;
+    color: $color1;
+    text-align: center;
+  }
+  > p {
+    line-height: 1.5;
+    white-space: pre-line;
+  }
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    p {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      span {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.blog-update {
+  @extend .login;
+  justify-content: flex-start;
+  margin-top: 80px;
+  textarea {
+    resize: none;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    border: 1px solid $fff;
+  }
+  form {
+    button {
+      margin-top: 0;
+    }
+  }
+}
+
+.blogs-list-main {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 80px;
+}

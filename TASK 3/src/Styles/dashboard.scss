@@ -1,5 +1,48 @@
 @import "./color";
 
 .dashboard {
-  padding-top: 100px;
+  margin-top: 65px;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  .details {
+    width: 80%;
+    justify-self: center;
+    align-self: center;
+    margin-top: 50px;
+    > p {
+      font-size: 32px;
+      span {
+        font-weight: bold;
+        color: $color1;
+      }
+    }
+    > div {
+      margin-top: 10px;
+      h2 {
+        font-size: 18px;
+      }
+      p {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: bold;
+        color: $color1;
+        span {
+          font-weight: normal;
+          color: $fff;
+        }
+      }
+      .nv {
+        color: red;
+        font-weight: bold;
+      }
+      .v {
+        color: green;
+        font-weight: bold;
+      }
+    }
+  }
 }

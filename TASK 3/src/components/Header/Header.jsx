@@ -11,7 +11,9 @@ function Header({ btnObj, links = [] }) {
         </h1>
       </Link>
       <div>
-        <div className="links">
+        <div
+          className={`links ${btnObj?.cls == "home-btn" ? "home-links" : ""}`}
+        >
           {links.length != 0
             ? links.map((el, i) => (
                 <Link to={el.path} key={i}>
@@ -21,7 +23,9 @@ function Header({ btnObj, links = [] }) {
             : ""}
         </div>
         <Link to={btnObj.path}>
-          <button>{btnObj.text}</button>
+          <button className={btnObj?.cls == "home-btn" ? "home-btn" : ""}>
+            {btnObj.text}
+          </button>
         </Link>
       </div>
     </nav>

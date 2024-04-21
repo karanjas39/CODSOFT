@@ -7,7 +7,10 @@ const links = [{ text: "Contact Us", path: "contact" }];
 function App() {
   return (
     <>
-      <Header btnObj={{ path: "login", text: "Login" }} links={links} />
+      <Header
+        btnObj={{ path: "login", text: "Login", cls: "home-btn" }}
+        links={links}
+      />
       <section className="app">
         <div className="top">
           <div>

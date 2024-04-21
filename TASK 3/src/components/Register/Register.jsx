@@ -22,6 +22,12 @@ function Register() {
         },
       });
       const data = await response.json();
+      if (data.success) {
+        setEmail("");
+        setName("");
+        setPassword("");
+        setUsername("");
+      }
       setMessage(data.message);
     } catch (error) {
       setMessage("Unable to register now. Try again later.");
