@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: true, limit: "12kb" }));
 app.use(cookieParser());
 
 // ROUTES
-app.use("/v1/api", cors({ origin: "*", credentials: true }), userRouter);
+app.use("/v1/api", cors(corsOptions), userRouter);
 
 // UNHANDLED ROUTES
 app.route("*").all((req, res) => {
