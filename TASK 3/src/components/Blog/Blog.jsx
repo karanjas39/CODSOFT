@@ -8,7 +8,6 @@ function Blog({
   id = "",
   setIsPopUp,
   setToDeleteBlog,
-  btns = true,
 }) {
   function handleBlogDelete() {
     setIsPopUp(true);
@@ -26,14 +25,12 @@ function Blog({
       <p>
         Created On: <span>{formatDate(createdAt)}</span>
       </p>
-      {btns && (
-        <div className="btns">
-          <button onClick={handleBlogDelete}>Delete</button>
-          <Link to={`/dashboard/blog/update/${id}`}>
-            <button>Update</button>
-          </Link>
-        </div>
-      )}
+      <div className="btns">
+        <button onClick={handleBlogDelete}>Delete</button>
+        <Link to={`/dashboard/blog/update/${id}`}>
+          <button>Update</button>
+        </Link>
+      </div>
     </div>
   );
 }

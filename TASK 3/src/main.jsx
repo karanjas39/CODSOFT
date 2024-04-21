@@ -17,14 +17,19 @@ import BlogCreate, { handleCreateBlog } from "./components/Blog/BlogCreate";
 import Details, { getDetails } from "./components/Dashboard/Details";
 import BlogView, { getBlog } from "./components/Blog/BlogView";
 import BLogUpdate, { blogUpdateInit } from "./components/Blog/BLogUpdate";
-import BlogList from "./components/Blog/BlogList";
+import BlogList, { getAllBlogs } from "./components/Blog/BlogList";
+import BlogOutlet from "./components/Blog/BlogOutlet";
+import BlogListView from "./components/Blog/BlogListView";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/">
       <Route path="" element={<App />} />
       <Route path="login" element={<Login />} action={handleLogin} />
-      <Route path="blogs" element={<BlogList />} />
+      <Route path="blogs" element={<BlogOutlet />}>
+        <Route loader={getAllBlogs} path="" element={<BlogList />} />
+        <Route loader={getBlog} path="view/:bid" element={<BlogListView />} />
+      </Route>
       <Route path="register" element={<Register />} />
       <Route
         // path="dashboard/:uid"
