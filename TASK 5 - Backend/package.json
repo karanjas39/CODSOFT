@@ -1,0 +1,28 @@
+{
+  "name": "task-5---backend",
+  "version": "1.0.0",
+  "description": "This is the backend of the task 5 assigned during Codsoft Internship.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "npm install"
+  },
+  "keywords": [
+    "Internship",
+    "Codsoft",
+    "Nodejs",
+    "Expressjs",
+    "Mongoose"
+  ],
+  "author": "Jaskaran Singh",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.3.2"
+  }
+}
