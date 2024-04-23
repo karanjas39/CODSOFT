@@ -27,7 +27,6 @@ async function isUserLoggedIn(req, res, next) {
     }
 
     req.id = decoded._id;
-    req.role = decoded.role;
     next();
   } catch (error) {
     return res.send({

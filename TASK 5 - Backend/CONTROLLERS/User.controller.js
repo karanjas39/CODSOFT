@@ -128,10 +128,7 @@ async function loginUser(req, res) {
       });
     }
 
-    const token = JWT.sign(
-      { _id: isUser._id, role: isUser.role },
-      process.env.JWT_TOKEN
-    );
+    const token = JWT.sign({ _id: isUser._id }, process.env.JWT_TOKEN);
 
     res.send({
       success: true,

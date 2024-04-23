@@ -36,7 +36,7 @@ app.use("/v1/api/user", cors(), userRouter);
 app.route("*").all((req, res) => {
   res.send({
     success: false,
-    message: "",
+    status: 404,
   });
 });
 
