@@ -3,6 +3,7 @@ const router = express.Router();
 
 const userControllers = require("../CONTROLLERS/User.controller");
 const quizCreateControllers = require("../CONTROLLERS/QuizCreate.controller");
+const quizTakeControllers = require("../CONTROLLERS/QuizTake.controller");
 const { isUserLoggedIn } = require("../MIDDLEWARES/isLoggedIn.middleware");
 
 // USER
@@ -18,6 +19,9 @@ router
 
 //  QUIZ CREATE
 router.route("/quiz/detail").get(quizCreateControllers.getQuiz);
+router
+  .route("/quiz/take")
+  .post(isUserLoggedIn, quizTakeControllers.createQuizTake);
 router
   .route("/quiz/create")
   .post(isUserLoggedIn, quizCreateControllers.createQuiz);

@@ -12,9 +12,13 @@ const quizTakeSchema = mongoose.Schema({
     default: null,
   },
   score: [Number],
+  pass: {
+    type: Boolean,
+    default: false,
+  },
   attempt: {
     type: Number,
-    default: 0,
+    default: 1,
   },
   active: {
     type: Boolean,
