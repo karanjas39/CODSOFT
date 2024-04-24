@@ -22,6 +22,7 @@ router.route("/quiz/detail").get(quizCreateControllers.getQuiz);
 router
   .route("/quiz/take")
   .post(isUserLoggedIn, quizTakeControllers.createQuizTake);
+router.route("/quiz/take/info").get(quizTakeControllers.getQuizTake);
 router
   .route("/quiz/create")
   .post(isUserLoggedIn, quizCreateControllers.createQuiz);

@@ -1,0 +1,21 @@
+@import "./style";
+nav {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  justify-content: space-between;
+  background-color: $bg;
+
+  h2 {
+    font-size: 32px;
+    color: $main;
+    z-index: $top;
+  }
+  > div {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: $top;
+  }
+}

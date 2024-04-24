@@ -1,4 +1,5 @@
 const QuizCreate = require("../MODELS/QuizCreate.model");
+const QuizTake = require("../MODELS/QuizTake.model");
 const User = require("../MODELS/User.model");
 
 module.exports = { createQuiz, updateQuizCreated, deleteQuizCreated, getQuiz };
@@ -117,7 +118,7 @@ async function updateQuizCreated(req, res) {
     }
 
     const quiz = await QuizCreate.findById(_id);
-    if (!quiz) {
+    if (!quiz || quiz.active == false) {
       return res.send({
         success: false,
         status: 404,
@@ -280,7 +281,7 @@ async function deleteQuizCreated(req, res) {
     }
 
     const quiz = await QuizCreate.findById(_id);
-    if (!quiz) {
+    if (!quiz || quiz.active == false) {
       return res.send({
         success: false,
         status: 404,
@@ -297,10 +298,10 @@ async function deleteQuizCreated(req, res) {
       });
     }
 
-    // TODO
-    // ACTIVE:FALSE FOR PEOPLE WHO TOOK THIS QUIZ
-
-    await QuizCreate.findByIdAndUpdate({ _id: _id }, { active: false });
+    await Promise.all([
+      QuizTake.updateMany({ quizId: _id }, { active: false }),
+      QuizCreate.findByIdAndUpdate({ _id: _id }, { active: false }),
+    ]);
 
     res.send({
       success: true,
@@ -333,7 +334,7 @@ async function getQuiz(req, res) {
         path: "createdBy",
         select: "name email -_id",
       });
-    if (!quiz) {
+    if (!quiz || quiz.active == false) {
       return res.send({
         success: false,
         status: 404,

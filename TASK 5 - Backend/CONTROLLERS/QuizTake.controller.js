@@ -2,7 +2,7 @@ const QuizTake = require("../MODELS/QuizTake.model");
 const QuizCreate = require("../MODELS/QuizCreate.model");
 const User = require("../MODELS/User.model");
 
-module.exports = { createQuizTake };
+module.exports = { createQuizTake, getQuizTake };
 
 async function createQuizTake(req, res) {
   try {
@@ -31,7 +31,7 @@ async function createQuizTake(req, res) {
     }
 
     const quiz = await QuizCreate.findById(quizId).select("+mcq.answer");
-    if (!quiz) {
+    if (!quiz || quiz.active == false) {
       return res.send({
         success: false,
         status: 404,
@@ -91,6 +91,65 @@ async function createQuizTake(req, res) {
       status: 200,
       message: passMessage,
       score,
+    });
+  } catch (error) {
+    res.send({
+      success: false,
+      status: 500,
+      message: `Error: ${error.toString()}`,
+    });
+  }
+}
+
+async function getQuizTake(req, res) {
+  try {
+    const { _id } = req.query;
+
+    if (!_id) {
+      return res.send({
+        success: false,
+        status: 404,
+        message: "Quiz ID is required and mcq should be an array.",
+      });
+    }
+
+    const quizTake = await QuizTake.findById(_id)
+      .populate({
+        path: "quizId",
+        select: "title createdBy -_id mcq",
+        populate: {
+          path: "createdBy",
+          select: "name  -_id",
+        },
+      })
+      .populate({
+        path: "takenBy",
+        select: "name  -_id",
+      })
+      .select("quizId score takenBy attempt")
+      .lean();
+
+    const total = quizTake.quizId.mcq.length;
+
+    const {
+      takenBy,
+      quizId: { title, createdBy },
+      score,
+      attempt,
+    } = quizTake;
+
+    if (!quizTake) {
+      return res.send({
+        success: false,
+        status: 404,
+        message: "Quiz not found.",
+      });
+    }
+
+    res.send({
+      success: true,
+      status: 200,
+      quiz: { takenBy, total, title, createdBy, score, attempt },
     });
   } catch (error) {
     res.send({
