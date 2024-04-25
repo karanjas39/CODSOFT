@@ -25,7 +25,7 @@ body {
 
 button {
   padding: 8px 20px;
-  border-radius: 15px;
+  border-radius: 10px;
   border: none;
   outline: none;
   background-color: $main;
@@ -35,6 +35,9 @@ button {
   transition: opacity 0.6s ease-in-out;
   width: max-content;
   font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
   &:hover {
     opacity: 0.85;
   }
@@ -54,4 +57,8 @@ a {
 
 section {
   min-height: calc(100vh - 65px);
+}
+
+.loader {
+  width: 20px;
 }

@@ -6,11 +6,14 @@ nav {
   padding: 10px 20px;
   justify-content: space-between;
   background-color: $bg;
-
-  h2 {
-    font-size: 32px;
-    color: $main;
+  a {
     z-index: $top;
+
+    h2 {
+      font-size: 32px;
+      color: $main;
+      z-index: $top;
+    }
   }
   > div {
     display: flex;

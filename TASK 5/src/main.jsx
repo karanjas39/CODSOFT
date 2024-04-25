@@ -11,12 +11,14 @@ import {
 
 import App from "./App";
 import Login from "./Components/Login/Login";
+import Register from "./Components/Register/Register";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/">
       <Route path="" element={<App />} />
       <Route path="login" element={<Login />} />
+      <Route path="register" element={<Register />} />
     </Route>
   )
 );

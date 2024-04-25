@@ -2,7 +2,7 @@ import { useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import Notification from "../Notification/Notification";
 import { useNavigate } from "react-router-dom";
-import "../../Styles/login.scss";
+import "../../Styles/register.scss";
 
 const links = [
   {
@@ -12,8 +12,8 @@ const links = [
 ];
 const btns = [
   {
-    text: "Register",
-    to: "/register",
+    text: "Login",
+    to: "/login",
   },
 ];
 
@@ -21,12 +21,14 @@ export default function Login() {
   const [msg, setMsg] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+  const [role, setRole] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  async function handleLoginSubmit(e) {
+  async function handleRegisterSubmit(e) {
     e.preventDefault();
-    if (!email || !password) {
+    if (!name || !email || !password || !role) {
       return setMsg("All fields are mandatory.");
     }
     const emailRegex =
@@ -38,23 +40,25 @@ export default function Login() {
 
     setLoading(true);
     try {
-      const response = await fetch("http://127.0.0.1:8080/v1/api/user/login", {
+      const response = await fetch("http://127.0.0.1:8080/v1/api/user/create", {
         method: "POST",
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, role, name }),
         headers: {
           "Content-type": "application/json",
         },
       });
       const data = await response.json();
+      console.log(data);
       if (!data.success) {
         throw new Error(data.message);
       }
       setMsg(data.message);
-      sessionStorage.setItem("token", data.token);
       setEmail("");
+      setName("");
+      setRole("");
       setPassword("");
       setTimeout(() => {
-        navigate("/");
+        navigate("/login");
       }, 5000);
     } catch (error) {
       setMsg(error.message);
@@ -65,13 +69,23 @@ export default function Login() {
 
   return (
     <>
-      <section className="login">
+      <section className="register">
         <NavBar links={links} btns={btns} />
-        <form onSubmit={handleLoginSubmit} className="login-form">
+        <form onSubmit={handleRegisterSubmit} className="register-form">
           <h2>
-            Quizeo's <span>Login</span> Portal
+            Quizeo's <span>Register</span> Portal
           </h2>
           <div>
+            <div>
+              <label htmlFor="name">Name</label>
+              <input
+                type="text"
+                id="name"
+                placeholder="Your Full name here..."
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
             <div>
               <label htmlFor="email">Email</label>
               <input
@@ -83,6 +97,20 @@ export default function Login() {
               />
             </div>
             <div>
+              <label htmlFor="role">Role</label>
+              <select
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+                id="role"
+              >
+                <option value="">Select your role</option>
+                <option value="taker">Taker (If you want to take Quiz)</option>
+                <option value="creator">
+                  Creator (If you want to create Quiz)
+                </option>
+              </select>
+            </div>
+            <div>
               <label htmlFor="password">Password</label>
               <input
                 type="password"
@@ -92,9 +120,8 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <p>Forget Password?</p>
             <button>
-              Submit{" "}
+              Register{" "}
               {loading && (
                 <img className="loader" src="/loader.svg" alt="Loader Image" />
               )}

@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "../../Styles/notification.scss";
 
-function Notification({ msg }) {
+function Notification({ msg, setMsg }) {
   const [show, setShow] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
       setShow(false);
+      setMsg("");
     }, 5000);
   }, []);
 

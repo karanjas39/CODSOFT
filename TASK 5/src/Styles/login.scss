@@ -1,0 +1,50 @@
+@import "./style";
+
+.login {
+  > .login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 50px;
+    width: 30%;
+    margin: 0 auto;
+    margin-top: 50px;
+    > div {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      div {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        label {
+          font-weight: bold;
+          font-size: 18px;
+        }
+
+        input {
+          padding: 10px;
+          border: none;
+          outline: none;
+          border-radius: 10px;
+        }
+      }
+      > p {
+        font-size: 14px;
+        transition: color 0.5s ease-in-out;
+        cursor: pointer;
+        &:hover {
+          color: $main;
+        }
+      }
+    }
+
+    > h2 {
+      font-size: 32px;
+      text-align: center;
+      span {
+        color: $main;
+      }
+    }
+  }
+}
