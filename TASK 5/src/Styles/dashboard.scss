@@ -1,0 +1,42 @@
+@import "./style";
+
+.dashboard {
+  > div {
+    width: 80%;
+    margin: 10px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    > .user-card {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      > h1 {
+        font-size: 28px;
+        span {
+          color: $main;
+        }
+      }
+      > p {
+        font-size: 14px;
+      }
+      > div {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+
+        > p {
+          display: flex;
+          align-items: center;
+          gap: 2px;
+          font-weight: bold;
+          color: $main;
+          span {
+            color: $c1;
+            font-weight: normal;
+          }
+        }
+      }
+    }
+  }
+}

@@ -12,6 +12,13 @@ import {
 import App from "./App";
 import Login from "./Components/Login/Login";
 import Register from "./Components/Register/Register";
+import DashboardCreator, {
+  getCreatorDetail,
+} from "./Components/Dashboard/DashboardCreator";
+import DashboardTaker, {
+  getTakerDetail,
+} from "./Components/Dashboard/DashboardTaker";
+import CreateQuiz from "./Components/CreateQuiz/CreateQuiz";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -19,6 +26,21 @@ const router = createBrowserRouter(
       <Route path="" element={<App />} />
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
+      <Route path="quiz">
+        <Route path="create" element={<CreateQuiz />} />
+      </Route>
+      <Route path="dashboard">
+        <Route
+          path="creator"
+          element={<DashboardCreator />}
+          loader={getCreatorDetail}
+        />
+        <Route
+          path="taker"
+          element={<DashboardTaker />}
+          loader={getTakerDetail}
+        />
+      </Route>
     </Route>
   )
 );

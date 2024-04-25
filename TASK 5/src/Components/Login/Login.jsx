@@ -49,13 +49,17 @@ export default function Login() {
       if (!data.success) {
         throw new Error(data.message);
       }
-      setMsg(data.message);
       sessionStorage.setItem("token", data.token);
+      setMsg(data.message);
       setEmail("");
       setPassword("");
       setTimeout(() => {
-        navigate("/");
-      }, 5000);
+        if (data.role == "creator") {
+          navigate("/dashboard/creator");
+        } else if (data.role == "taker") {
+          navigate("/dashboard/taker");
+        }
+      }, 2000);
     } catch (error) {
       setMsg(error.message);
     } finally {
