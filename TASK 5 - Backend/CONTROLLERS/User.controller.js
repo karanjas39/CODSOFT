@@ -135,6 +135,7 @@ async function loginUser(req, res) {
       status: 200,
       message: "Hey! you are successfully loggedIn.",
       token,
+      role: isUser.role,
     });
   } catch (error) {
     res.send({
@@ -149,7 +150,7 @@ async function getUser(req, res) {
   try {
     const { id, role } = req;
 
-    const isUser = await User.findById(id).select("-_id");
+    const isUser = await User.findById(id).select("-_id -otp -otpCreatedAt");
 
     if (!isUser) {
       return res.send({
