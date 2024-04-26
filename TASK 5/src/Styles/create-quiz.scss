@@ -1,0 +1,89 @@
+@import "./_style.scss";
+
+.create-quiz {
+  > div {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 20px;
+    > h2 {
+      font-size: 32px;
+      text-align: center;
+      color: $main;
+    }
+    > form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 70%;
+      margin: 0 auto;
+      > div {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        > label {
+          font-size: 18px;
+          font-weight: bold;
+        }
+        input,
+        textarea,
+        select {
+          padding: 10px;
+          border: none;
+          outline: none;
+          background-color: #fff;
+          border-radius: 10px;
+          resize: none;
+        }
+      }
+      > .mcq-container {
+        > div {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          > h2 {
+            font-size: 18px;
+          }
+          > p {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}
+
+.mcqForm {
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px !important;
+  border-left: solid 5px $main;
+  padding-left: 10px;
+
+  > div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    > label {
+      font-size: 18px;
+      font-weight: bold;
+    }
+    input {
+      padding: 10px;
+      border: none;
+      outline: none;
+      background-color: #fff;
+      border-radius: 10px;
+      resize: none;
+    }
+    > p {
+      cursor: pointer;
+      font-size: 18px;
+    }
+  }
+  input {
+    width: 100%;
+  }
+}
