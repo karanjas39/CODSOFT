@@ -24,9 +24,7 @@ function CreateQuiz() {
   const [difficulty, setDifficulty] = useState("");
   const [passScore, setPassScore] = useState("");
   const [mcq, setMcq] = useState([]);
-  const [mcqForm, setMcqForm] = useState(false);
-  const [newQuestion, setNewQuestion] = useState("");
-  const [newQuestionOptions, setNewQuestionOptions] = useState([]);
+  const [IsMcqFormOpen, SetIsMcqFormOpen] = useState(false);
 
   return (
     <section className="create-quiz">
@@ -82,21 +80,13 @@ function CreateQuiz() {
           <div className="mcq-container">
             <div>
               <h2>MCQs</h2>
-              <p onClick={() => setMcqForm(true)}>
+              <p onClick={() => SetIsMcqFormOpen(true)}>
                 <FaPlusCircle />
               </p>
             </div>
           </div>
         </form>
-        {mcqForm && (
-          <McqForm
-            setMcqForm={setMcqForm}
-            newQuestion={newQuestion}
-            newQuestionOptions={newQuestionOptions}
-            setNewQuestion={setNewQuestion}
-            setNewQuestionOptions={setNewQuestionOptions}
-          />
-        )}
+        {IsMcqFormOpen && <McqForm SetIsMcqFormOpen={SetIsMcqFormOpen} />}
       </div>
     </section>
   );

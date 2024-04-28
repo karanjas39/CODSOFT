@@ -1,26 +1,32 @@
+import { useState } from "react";
 import "../../Styles/create-quiz.scss";
-import { MdDelete } from "react-icons/md";
+import McqQuestionOption from "./McqQuestionOption";
+import Notification from "../Notification/Notification";
 
-export default function McqForm({
-  setMcqForm,
-  setNewQuestionOptions,
-  setNewQuestion,
-  newQuestionOptions,
-  newQuestion,
-}) {
+export default function McqForm({ SetIsMcqFormOpen }) {
+  const [newQuestion, setNewQuestion] = useState("");
+  const [options, setOptions] = useState([]);
+
   function handleMcqFormClose() {
-    setMcqForm(false);
+    SetIsMcqFormOpen(false);
   }
   function handleNewQuestionSubmit(e) {
     e.preventDefault();
   }
-  function addNewOption(e) {
-    console.log(e);
-    // setNewQuestionOptions((prev) => [...prev, { text: e.target.value }]);
+  function handleAddNewOption(e) {
+    e.preventDefault();
+    setOptions((options) => [...options, { opt: "", id: Date.now() }]);
+  }
+  function handleOptionChange({ newValue, id }) {
+    setOptions((prevOptions) =>
+      prevOptions.map((option) =>
+        option.id === id ? { ...option, opt: newValue } : option
+      )
+    );
   }
 
   return (
-    <div className="mcqForm" onSubmit={handleNewQuestionSubmit}>
+    <div className="mcqForm">
       <div>
         <label htmlFor="question">Question</label>
         <input
@@ -31,18 +37,23 @@ export default function McqForm({
           onChange={(e) => setNewQuestion(e.target.value)}
         />
       </div>
-      <div>
-        <input
-          type="text"
-          placeholder="Enter option here..."
-          onSubmit={addNewOption}
-        />
-        <p>
-          <MdDelete />
-        </p>
-      </div>
+      <>
+        {options.length != 0 &&
+          options.map((option) => {
+            return (
+              <McqQuestionOption
+                key={option.id}
+                opt={option.opt}
+                id={option.id}
+                handleOptionChange={handleOptionChange}
+                setOptions={setOptions}
+              />
+            );
+          })}
+      </>
       <div className="btns">
-        <button>Add Option</button>
+        <button onClick={handleNewQuestionSubmit}>Submit</button>
+        <button onClick={handleAddNewOption}>Add Option</button>
         <button onClick={handleMcqFormClose}>Delete Question</button>
       </div>
     </div>
