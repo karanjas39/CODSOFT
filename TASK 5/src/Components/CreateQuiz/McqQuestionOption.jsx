@@ -1,7 +1,15 @@
 import { useState } from "react";
 import { MdDelete } from "react-icons/md";
+import { SiTicktick } from "react-icons/si";
 
-function McqQuestionOption({ setOptions, id, opt, handleOptionChange }) {
+function McqQuestionOption({
+  setOptions,
+  id,
+  opt,
+  handleOptionChange,
+  setCorrectAnswer,
+  correctAnswer,
+}) {
   const [newOption, setNewOption] = useState(opt);
 
   function onOptionChange(e) {
@@ -11,7 +19,16 @@ function McqQuestionOption({ setOptions, id, opt, handleOptionChange }) {
   }
 
   function handleNewOptionDelete() {
+    setCorrectAnswer(null);
     setOptions((options) => options.filter((option) => option.id !== id));
+  }
+
+  function handleSetCorrectAnswer() {
+    if (correctAnswer === id) {
+      setCorrectAnswer(null);
+      return;
+    }
+    setCorrectAnswer(id);
   }
 
   return (
@@ -22,6 +39,12 @@ function McqQuestionOption({ setOptions, id, opt, handleOptionChange }) {
         value={newOption}
         onChange={onOptionChange}
       />
+      <p
+        onClick={handleSetCorrectAnswer}
+        className={correctAnswer === id ? "correctans" : ""}
+      >
+        <SiTicktick />
+      </p>
       <p onClick={handleNewOptionDelete}>
         <MdDelete />
       </p>

@@ -16,6 +16,9 @@
       gap: 10px;
       width: 70%;
       margin: 0 auto;
+      .btns {
+        align-self: flex-end;
+      }
       > div {
         display: flex;
         flex-direction: column;
@@ -38,13 +41,40 @@
       > .mcq-container {
         > div {
           display: flex;
-          align-items: center;
           justify-content: space-between;
+          div {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            p {
+              display: flex;
+              align-items: center;
+              gap: 5px;
+            }
+            .correct {
+              color: $main;
+              font-weight: bold;
+            }
+          }
           > h2 {
             font-size: 18px;
           }
           > p {
             cursor: pointer;
+          }
+        }
+        > .mcq-created-list {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          div {
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 10px;
+            > h3 {
+              font-size: 16px;
+              text-align: start;
+            }
           }
         }
       }
@@ -81,6 +111,11 @@
     > p {
       cursor: pointer;
       font-size: 18px;
+    }
+    .correctans {
+      > svg {
+        color: $main;
+      }
     }
   }
   input {

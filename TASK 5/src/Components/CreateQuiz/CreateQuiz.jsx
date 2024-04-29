@@ -3,6 +3,9 @@ import "../../Styles/create-quiz.scss";
 import { useState } from "react";
 import { FaPlusCircle } from "react-icons/fa";
 import McqForm from "./McqForm";
+import McqListedInList from "./McqListedInList";
+import Notification from "../Notification/Notification";
+import { useNavigate } from "react-router-dom";
 
 const links = [
   {
@@ -25,6 +28,85 @@ function CreateQuiz() {
   const [passScore, setPassScore] = useState("");
   const [mcq, setMcq] = useState([]);
   const [IsMcqFormOpen, SetIsMcqFormOpen] = useState(false);
+  const [msg, setMsg] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  async function handleSubmitNewQuiz(e) {
+    e.preventDefault();
+    if (
+      !title ||
+      !(title.split(" ").length >= 2 && title.split(" ").length <= 5)
+    ) {
+      return setMsg("Quiz title length should be between 2 and 5 words.");
+    }
+    if (
+      !description ||
+      !(
+        description.split(" ").length >= 5 &&
+        description.split(" ").length <= 100
+      )
+    ) {
+      return setMsg(
+        "Quiz description length should be between 5 and 100 words."
+      );
+    }
+    if (!passScore || passScore < 1 || passScore > mcq.length) {
+      return setMsg(
+        "Pass score should be less than or equal to the total number of questions."
+      );
+    }
+    if (!difficulty) {
+      return setMsg("Choose the difficulty level.");
+    }
+    if (mcq.length < 5) {
+      return setMsg("There should be at least 5 questions in the quiz.");
+    }
+    const mcqs = mcq.map((ques) => ({
+      question: ques.question,
+      options: ques.options,
+      answer: ques.answer,
+    }));
+    setLoading(true);
+    try {
+      const token = sessionStorage.getItem("token");
+      if (!token) {
+        navigate("/login");
+      }
+      const response = await fetch(
+        "http://127.0.0.1:8080/v1/api/user/quiz/create",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            mcq: mcqs,
+            title,
+            description,
+            difficulty,
+            passScore: parseInt(passScore),
+          }),
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const data = await response.json();
+      if (!data.success) {
+        throw new Error(data.message);
+      } else {
+        setMsg(data.message);
+        setDescription("");
+        setDifficulty("");
+        setTitle("");
+        setMcq([]);
+        setPassScore("");
+      }
+    } catch (error) {
+      setMsg(error.message);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <section className="create-quiz">
@@ -32,6 +114,14 @@ function CreateQuiz() {
       <div>
         <h2>Create Quiz</h2>
         <form>
+          <div className="btns">
+            <button onClick={handleSubmitNewQuiz}>
+              Create{" "}
+              {loading && (
+                <img className="loader" src="/loader.svg" alt="Loader Image" />
+              )}
+            </button>
+          </div>
           <div>
             <label htmlFor="title">Title</label>
             <input
@@ -80,13 +170,27 @@ function CreateQuiz() {
           <div className="mcq-container">
             <div>
               <h2>MCQs</h2>
-              <p onClick={() => SetIsMcqFormOpen(true)}>
+              <p onClick={() => SetIsMcqFormOpen((prev) => !prev)}>
                 <FaPlusCircle />
               </p>
             </div>
+            <div className="mcq-created-list">
+              {mcq.length != 0 &&
+                mcq.map((question, i) => (
+                  <McqListedInList
+                    key={question.id}
+                    ques={question}
+                    i={i + 1}
+                    setMcq={setMcq}
+                  />
+                ))}
+            </div>
           </div>
         </form>
-        {IsMcqFormOpen && <McqForm SetIsMcqFormOpen={SetIsMcqFormOpen} />}
+        {IsMcqFormOpen && (
+          <McqForm SetIsMcqFormOpen={SetIsMcqFormOpen} setMcq={setMcq} />
+        )}
+        {msg && <Notification msg={msg} setMsg={setMsg} />}
       </div>
     </section>
   );
