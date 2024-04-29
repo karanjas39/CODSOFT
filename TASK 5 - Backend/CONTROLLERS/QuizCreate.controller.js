@@ -2,7 +2,13 @@ const QuizCreate = require("../MODELS/QuizCreate.model");
 const QuizTake = require("../MODELS/QuizTake.model");
 const User = require("../MODELS/User.model");
 
-module.exports = { createQuiz, updateQuizCreated, deleteQuizCreated, getQuiz };
+module.exports = {
+  createQuiz,
+  updateQuizCreated,
+  deleteQuizCreated,
+  getQuiz,
+  getUserAllQuiz,
+};
 
 async function createQuiz(req, res) {
   try {
@@ -347,6 +353,36 @@ async function getQuiz(req, res) {
       success: true,
       status: 200,
       quiz,
+    });
+  } catch (error) {
+    res.send({
+      success: false,
+      status: 500,
+      message: `Error: ${error.toString()}`,
+    });
+  }
+}
+
+async function getUserAllQuiz(req, res) {
+  try {
+    const { id } = req;
+
+    const quizes = await QuizCreate.find({
+      createdBy: id,
+      active: true,
+    }).select("title description createdAt");
+
+    if (quizes.length == 0) {
+      return res.send({
+        success: false,
+        status: 404,
+        message: "No quiz is created yet.",
+      });
+    }
+    res.send({
+      success: true,
+      status: 200,
+      quizes,
     });
   } catch (error) {
     res.send({

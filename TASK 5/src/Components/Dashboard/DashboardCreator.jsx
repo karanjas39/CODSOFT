@@ -5,6 +5,7 @@ import formatDate from "../../Utils/formatDate";
 import { MdEmail } from "react-icons/md";
 import { FaCertificate, FaUser } from "react-icons/fa";
 import "../../Styles/dashboard.scss";
+import RecentlyCreatedQuizes from "./RecentlyCreatedQuizes";
 
 const links = [
   {
@@ -22,7 +23,10 @@ const btns = [
 ];
 
 export default function DashboardCreator() {
-  const { user } = useLoaderData();
+  const {
+    data1: { user },
+    data2: { quizes },
+  } = useLoaderData();
   const [firstLetter, ...last] = user?.role?.split("");
   const [greeting, setGreeting] = useState("");
   const navigate = useNavigate();
@@ -70,7 +74,17 @@ export default function DashboardCreator() {
         <hr />
         <div className="user-created-quiz">
           <h2>Recently Created Quiz</h2>
-          <div></div>
+          <div>
+            {quizes.map((quiz) => (
+              <RecentlyCreatedQuizes
+                key={quiz._id}
+                title={quiz.title}
+                description={quiz.description}
+                createdAt={quiz.createdAt}
+                _id={quiz._id}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -82,18 +96,30 @@ export async function getCreatorDetail() {
   if (!token) {
     throw new Error("Unauthorized access.");
   }
-  const response = await fetch("http://127.0.0.1:8080/v1/api/user", {
+  const response1 = await fetch("http://127.0.0.1:8080/v1/api/user", {
     method: "GET",
     headers: {
       "Content-type": "application/json",
       Authorization: `Bearer ${token}`,
     },
   });
-  const data = await response.json();
 
-  if (!data.success) {
-    throw new Error(data.message);
+  const response2 = await fetch("http://127.0.0.1:8080/v1/api/user/quiz/all", {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const [res1, res2] = await Promise.all([response1, response2]);
+  const [data1, data2] = await Promise.all([res1.json(), res2.json()]);
+  console.log(data1);
+  console.log(data2);
+
+  if (!data1.success) {
+    throw new Error(data1.message);
   }
-  if (data.user.role != "creator") throw new Error("Unauthorized access.");
-  return data;
+  if (data1.user.role != "creator") throw new Error("Unauthorized access.");
+  return { data1, data2 };
 }

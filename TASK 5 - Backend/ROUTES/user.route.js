@@ -17,12 +17,17 @@ router
   .route("/account/verification/end")
   .post(isUserLoggedIn, userControllers.verifyOTP);
 
-//  QUIZ CREATE
+//  QUIZ TAKER
 router.route("/quiz/detail").get(quizCreateControllers.getQuiz);
 router
   .route("/quiz/take")
   .post(isUserLoggedIn, quizTakeControllers.createQuizTake);
 router.route("/quiz/take/info").get(quizTakeControllers.getQuizTake);
+
+//  QUIZ CREATOR
+router
+  .route("/quiz/all")
+  .get(isUserLoggedIn, quizCreateControllers.getUserAllQuiz);
 router
   .route("/quiz/create")
   .post(isUserLoggedIn, quizCreateControllers.createQuiz);

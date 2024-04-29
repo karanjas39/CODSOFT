@@ -5,3 +5,23 @@ $c1: #000000;
 $shadow: -4px -5px 18px 0px rgba(0, 0, 0, 0.084);
 $top: 100;
 $btm: 90;
+
+.btn {
+  padding: 8px 20px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background-color: $main;
+  color: $bg;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.6s ease-in-out;
+  width: max-content;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  &:hover {
+    opacity: 0.85;
+  }
+}
