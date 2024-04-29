@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import "../../Styles/dashboard.scss";
 import formatDate from "../../Utils/formatDate";
 
@@ -13,7 +12,6 @@ function RecentlyCreatedQuizes({ title, description, _id, createdAt }) {
       </p>
       <p className="date">Created On: {formatDate(createdAt)}</p>
       <div className="btns">
-        <Link to={`quiz/update?${_id}`}>Update</Link>
         <button>Delete</button>
       </div>
     </div>

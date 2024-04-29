@@ -7,10 +7,6 @@ import { FaCertificate, FaUser } from "react-icons/fa";
 import "../../Styles/dashboard.scss";
 
 const links = [
-  {
-    text: "Manage Account",
-    to: "/",
-  },
   { text: "My Certificates", to: "/" },
   { text: "Take Quiz", to: "/" },
 ];

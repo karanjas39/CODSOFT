@@ -7,13 +7,7 @@ import { FaCertificate, FaUser } from "react-icons/fa";
 import "../../Styles/dashboard.scss";
 import RecentlyCreatedQuizes from "./RecentlyCreatedQuizes";
 
-const links = [
-  {
-    text: "Manage Account",
-    to: "/",
-  },
-  { text: "Create Quiz", to: "/quiz/create" },
-];
+const links = [{ text: "Create Quiz", to: "/quiz/create" }];
 
 const btns = [
   {
@@ -114,8 +108,6 @@ export async function getCreatorDetail() {
 
   const [res1, res2] = await Promise.all([response1, response2]);
   const [data1, data2] = await Promise.all([res1.json(), res2.json()]);
-  console.log(data1);
-  console.log(data2);
 
   if (!data1.success) {
     throw new Error(data1.message);
