@@ -87,6 +87,7 @@ async function createQuiz(req, res) {
       passScore: Number(passScore),
       mcq,
       createdBy: id,
+      difficulty,
     });
 
     return res.send({
