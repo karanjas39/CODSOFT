@@ -28,7 +28,7 @@ function App() {
             Become <span>creator</span> to create quiz or <span>taker</span> to
             take quiz.
           </p>
-          <Link to="/">
+          <Link to="/quiz/all">
             <button>Start now</button>
           </Link>
         </div>

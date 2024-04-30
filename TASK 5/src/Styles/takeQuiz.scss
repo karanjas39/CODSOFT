@@ -1,0 +1,91 @@
+@import "./style";
+
+.takeQuiz-section {
+  display: flex;
+  flex-direction: column;
+
+  > .take-quiz-test {
+    width: 60%;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    > h2 {
+      font-size: 28px;
+      color: $main;
+    }
+    > p {
+      font-size: 18px;
+    }
+    > div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .creator {
+        > p {
+          font-size: 14px;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          span {
+            font-weight: bold;
+            color: $main;
+          }
+        }
+        button {
+          padding: 5px 10px;
+          font-size: 14px;
+        }
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .quiz-dt {
+        font-size: 14px;
+        p {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          span {
+            font-weight: bold;
+            color: $main;
+          }
+        }
+      }
+    }
+
+    > .mcqs {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: unset;
+      gap: 15px;
+      margin-top: 10px;
+
+      .ques {
+        width: 100%;
+        padding: 10px;
+        background-color: #fff;
+        border-radius: 10px;
+        > p {
+          font-weight: bold;
+          margin-bottom: 5px;
+        }
+        .options {
+          display: flex;
+          flex-direction: column;
+          gap: 4px;
+          p {
+            color: $c1;
+            cursor: pointer;
+            transition: color 0.5s ease-in-out;
+            &:hover {
+              color: $main;
+            }
+          }
+        }
+      }
+    }
+  }
+}

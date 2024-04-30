@@ -8,7 +8,7 @@ import "../../Styles/dashboard.scss";
 
 const links = [
   { text: "My Certificates", to: "/" },
-  { text: "Take Quiz", to: "/" },
+  { text: "Take Quiz", to: "/quiz/all" },
 ];
 
 const btns = [
