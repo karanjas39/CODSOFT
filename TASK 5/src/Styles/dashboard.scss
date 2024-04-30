@@ -80,4 +80,23 @@
       }
     }
   }
+  > .recent-taken-quiz {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    > .recent-quiz-template {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      padding: 15px;
+      border-radius: 10px;
+      background-color: #fff;
+      > h3 {
+        color: $main;
+      }
+      p {
+        font-size: 14px;
+      }
+    }
+  }
 }

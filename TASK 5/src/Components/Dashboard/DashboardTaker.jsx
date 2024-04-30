@@ -1,4 +1,4 @@
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import formatDate from "../../Utils/formatDate";
@@ -6,10 +6,7 @@ import { MdEmail } from "react-icons/md";
 import { FaCertificate, FaUser } from "react-icons/fa";
 import "../../Styles/dashboard.scss";
 
-const links = [
-  { text: "My Certificates", to: "/" },
-  { text: "Take Quiz", to: "/quiz/all" },
-];
+const links = [{ text: "Take Quiz", to: "/quiz/all" }];
 
 const btns = [
   {
@@ -19,7 +16,10 @@ const btns = [
 ];
 
 export default function DashboardTaker() {
-  const { user } = useLoaderData();
+  const {
+    data1: { user },
+    data2: { quizes },
+  } = useLoaderData();
   const [firstLetter, ...last] = user?.role?.split("");
   const [greeting, setGreeting] = useState("");
   const navigate = useNavigate();
@@ -67,7 +67,22 @@ export default function DashboardTaker() {
         <hr />
         <div className="user-created-quiz">
           <h2>Recently Taken Quiz</h2>
-          <div></div>
+          <div className="recent-taken-quiz">
+            {quizes.map((quiz) => (
+              <div className="recent-quiz-template">
+                <h3>{quiz.quizId.title}</h3>
+                <p>
+                  <span>Attempt:</span> {quiz.attempt}
+                </p>
+                <p>
+                  <span>Attempted On:</span> {formatDate(quiz.createdAt)}
+                </p>
+                <Link to={`/quiz/certificate/${quiz._id}`}>
+                  <button>Show Certificate</button>
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -79,17 +94,26 @@ export async function getTakerDetail() {
   if (!token) {
     throw new Error("Unauthorized access.");
   }
-  const response = await fetch("http://127.0.0.1:8080/v1/api/user", {
+  const response1 = fetch("http://127.0.0.1:8080/v1/api/user", {
     method: "GET",
     headers: {
       "Content-type": "application/json",
       Authorization: `Bearer ${token}`,
     },
   });
-  const data = await response.json();
-  if (!data.success) {
-    throw new Error(data.message);
+  const response2 = fetch("http://127.0.0.1:8080/v1/api/user/quiz/take/all", {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  const [res1, res2] = await Promise.all([response1, response2]);
+  const [data1, data2] = await Promise.all([res1.json(), res2.json()]);
+
+  if (!data1.success) {
+    throw new Error(data1.message);
   }
-  if (data.user.role != "taker") throw new Error("Unauthorized access.");
-  return data;
+  if (data1.user.role != "taker") throw new Error("Unauthorized access.");
+  return { data1, data2 };
 }

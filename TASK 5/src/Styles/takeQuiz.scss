@@ -76,6 +76,10 @@
           display: flex;
           flex-direction: column;
           gap: 4px;
+          .selected {
+            color: $main;
+            font-weight: bold;
+          }
           p {
             color: $c1;
             cursor: pointer;

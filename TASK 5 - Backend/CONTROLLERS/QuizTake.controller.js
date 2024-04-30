@@ -2,7 +2,7 @@ const QuizTake = require("../MODELS/QuizTake.model");
 const QuizCreate = require("../MODELS/QuizCreate.model");
 const User = require("../MODELS/User.model");
 
-module.exports = { createQuizTake, getQuizTake };
+module.exports = { createQuizTake, getQuizTake, getTakenQuiz };
 
 async function createQuizTake(req, res) {
   try {
@@ -150,6 +150,49 @@ async function getQuizTake(req, res) {
       success: true,
       status: 200,
       quiz: { takenBy, total, title, createdBy, score, attempt },
+    });
+  } catch (error) {
+    res.send({
+      success: false,
+      status: 500,
+      message: `Error: ${error.toString()}`,
+    });
+  }
+}
+
+async function getTakenQuiz(req, res) {
+  try {
+    const { id } = req;
+
+    const isUser = await User.findById(id);
+
+    if (!isUser || !isUser.verified || isUser.role !== "taker") {
+      return res.send({
+        success: false,
+        status: 403,
+        message:
+          "Unauthorized access. You do not have the necessary permissions.",
+      });
+    }
+
+    const quizTakes = await QuizTake.find({ takenBy: id, active: true })
+      .select("quizId attempt createdAt")
+      .populate({
+        path: "quizId",
+        select: "title -_id",
+      });
+    if (!quizTakes) {
+      return res.send({
+        success: false,
+        status: 404,
+        message: "No quiz is taken yet.",
+      });
+    }
+
+    res.send({
+      success: true,
+      status: 200,
+      quizes: quizTakes,
     });
   } catch (error) {
     res.send({

@@ -18,13 +18,16 @@ router
   .post(isUserLoggedIn, userControllers.verifyOTP);
 
 //  QUIZ TAKER
-router.route("/quiz/detail").get(quizCreateControllers.getQuiz);
+router
+  .route("/quiz/take/all")
+  .get(isUserLoggedIn, quizTakeControllers.getTakenQuiz);
 router
   .route("/quiz/take")
   .post(isUserLoggedIn, quizTakeControllers.createQuizTake);
 router.route("/quiz/take/info").get(quizTakeControllers.getQuizTake);
 
 //  QUIZ CREATOR
+router.route("/quiz/detail").get(quizCreateControllers.getQuiz);
 router.route("/quiz/all/user").get(quizCreateControllers.getAllQuizes);
 router
   .route("/quiz/all")

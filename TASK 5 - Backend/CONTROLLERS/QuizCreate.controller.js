@@ -337,7 +337,7 @@ async function getQuiz(req, res) {
     }
 
     const quiz = await QuizCreate.findById(_id)
-      .select("-active -_id -updatedAt -difficulty")
+      .select("-active -updatedAt -difficulty")
       .populate({
         path: "createdBy",
         select: "name email -_id",
