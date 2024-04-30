@@ -8,6 +8,7 @@ module.exports = {
   deleteQuizCreated,
   getQuiz,
   getUserAllQuiz,
+  getAllQuizes,
 };
 
 async function createQuiz(req, res) {
@@ -336,7 +337,7 @@ async function getQuiz(req, res) {
     }
 
     const quiz = await QuizCreate.findById(_id)
-      .select("-active -_id -updatedAt")
+      .select("-active -_id -updatedAt -difficulty")
       .populate({
         path: "createdBy",
         select: "name email -_id",
@@ -379,6 +380,37 @@ async function getUserAllQuiz(req, res) {
         message: "No quiz is created yet.",
       });
     }
+    res.send({
+      success: true,
+      status: 200,
+      quizes,
+    });
+  } catch (error) {
+    res.send({
+      success: false,
+      status: 500,
+      message: `Error: ${error.toString()}`,
+    });
+  }
+}
+
+async function getAllQuizes(req, res) {
+  try {
+    const quizes = await QuizCreate.find({ active: true })
+      .select("title description difficulty createdBy createdAt")
+      .populate({
+        path: "createdBy",
+        select: "name -_id",
+      });
+
+    if (!quizes) {
+      return res.send({
+        success: false,
+        status: 404,
+        message: "No quiz is found yet.",
+      });
+    }
+
     res.send({
       success: true,
       status: 200,

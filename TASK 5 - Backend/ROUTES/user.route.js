@@ -25,6 +25,7 @@ router
 router.route("/quiz/take/info").get(quizTakeControllers.getQuizTake);
 
 //  QUIZ CREATOR
+router.route("/quiz/all/user").get(quizCreateControllers.getAllQuizes);
 router
   .route("/quiz/all")
   .get(isUserLoggedIn, quizCreateControllers.getUserAllQuiz);
