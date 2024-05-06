@@ -69,7 +69,7 @@ export default function DashboardTaker() {
           <h2>Recently Taken Quiz</h2>
           <div className="recent-taken-quiz">
             {quizes.map((quiz) => (
-              <div className="recent-quiz-template">
+              <div className="recent-quiz-template" key={quiz._id}>
                 <h3>{quiz.quizId.title}</h3>
                 <p>
                   <span>Attempt:</span> {quiz.attempt}

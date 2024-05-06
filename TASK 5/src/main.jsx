@@ -23,7 +23,9 @@ import TakeQuiz, {
   getTakerDetailAndReadyQuiz,
 } from "./Components/TakeQuiz/TakeQuiz";
 import AllQuiz, { getAllQuizesInMain } from "./Components/AllQuiz/AllQuiz";
-import Quizcertificate from "./Components/QuizCertificate.jsx/Quizcertificate";
+import Quizcertificate, {
+  getQuizCertificate,
+} from "./Components/QuizCertificate.jsx/Quizcertificate";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,7 +35,11 @@ const router = createBrowserRouter(
       <Route path="register" element={<Register />} />
       <Route path="quiz">
         <Route path="all" element={<AllQuiz />} loader={getAllQuizesInMain} />
-        <Route path="certificate/:cid" element={<Quizcertificate />} />
+        <Route
+          path="certificate/:cid"
+          element={<Quizcertificate />}
+          loader={getQuizCertificate}
+        />
         <Route path="create" element={<CreateQuiz />} />
         <Route
           path="take/:qid"
