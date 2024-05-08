@@ -77,9 +77,12 @@ export default function DashboardTaker() {
                 <p>
                   <span>Attempted On:</span> {formatDate(quiz.createdAt)}
                 </p>
-                <Link to={`/quiz/certificate/${quiz._id}`}>
-                  <button>Show Certificate</button>
-                </Link>
+                <div className="btns">
+                  <Link to={`/quiz/certificate/${quiz._id}`}>
+                    <button>Show Certificate</button>
+                  </Link>
+                  <button>Share</button>
+                </div>
               </div>
             ))}
           </div>

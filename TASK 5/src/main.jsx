@@ -25,7 +25,7 @@ import TakeQuiz, {
 import AllQuiz, { getAllQuizesInMain } from "./Components/AllQuiz/AllQuiz";
 import Quizcertificate, {
   getQuizCertificate,
-} from "./Components/QuizCertificate.jsx/Quizcertificate";
+} from "./Components/QuizCertificate/Quizcertificate";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

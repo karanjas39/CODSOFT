@@ -1,0 +1,83 @@
+@import "./style";
+
+.certificate {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  width: 90%;
+  margin: 20px auto;
+  background-color: $bg;
+  box-shadow: $shadow;
+  padding: 20px;
+  border-radius: 15px;
+  > .web-cert {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    > h1 {
+      font-size: 38px;
+      color: $main;
+    }
+    > div {
+      font-size: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+  }
+  > .cert-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    width: 60%;
+    margin: 0 auto;
+
+    > h2 {
+      font-size: 24px;
+    }
+    p {
+      font-size: 18px;
+      > span {
+        font-weight: bold;
+        color: $main;
+      }
+    }
+  }
+  > .present {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    > p {
+      font-size: 16px;
+      &:first-of-type {
+        font-weight: bold;
+        font-size: 20px;
+      }
+      &:nth-child(2) {
+        font-weight: bold;
+        color: $main;
+      }
+      &:last-of-type {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: "765px") {
+  .certificate {
+    width: 95%;
+    > .web-cert {
+      flex-direction: column;
+      gap: 20px;
+      > div {
+        font-size: 10px;
+      }
+    }
+    > .cert-detail {
+      width: 90%;
+    }
+  }
+}

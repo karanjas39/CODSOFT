@@ -97,6 +97,11 @@
       p {
         font-size: 14px;
       }
+      .btns {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
     }
   }
 }
