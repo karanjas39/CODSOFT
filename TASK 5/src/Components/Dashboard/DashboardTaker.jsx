@@ -5,6 +5,7 @@ import formatDate from "../../Utils/formatDate";
 import { MdEmail } from "react-icons/md";
 import { FaCertificate, FaUser } from "react-icons/fa";
 import "../../Styles/dashboard.scss";
+import Notification from "../Notification/Notification";
 
 const links = [{ text: "Take Quiz", to: "/quiz/all" }];
 
@@ -22,6 +23,7 @@ export default function DashboardTaker() {
   } = useLoaderData();
   const [firstLetter, ...last] = user?.role?.split("");
   const [greeting, setGreeting] = useState("");
+  const [msg, setMsg] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -40,6 +42,17 @@ export default function DashboardTaker() {
       navigate("/login");
     }
   }, [user]);
+
+  function handleShareBtn(id) {
+    const url = `http://localhost:5173/quiz/certificate/${id}`;
+    const textarea = document.createElement("textarea");
+    textarea.value = url;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textarea);
+    setMsg("Link is copied to clipboard.");
+  }
 
   return (
     <section className="dashboard">
@@ -68,25 +81,30 @@ export default function DashboardTaker() {
         <div className="user-created-quiz">
           <h2>Recently Taken Quiz</h2>
           <div className="recent-taken-quiz">
-            {quizes.map((quiz) => (
-              <div className="recent-quiz-template" key={quiz._id}>
-                <h3>{quiz.quizId.title}</h3>
-                <p>
-                  <span>Attempt:</span> {quiz.attempt}
-                </p>
-                <p>
-                  <span>Attempted On:</span> {formatDate(quiz.createdAt)}
-                </p>
-                <div className="btns">
-                  <Link to={`/quiz/certificate/${quiz._id}`}>
-                    <button>Show Certificate</button>
-                  </Link>
-                  <button>Share</button>
-                </div>
-              </div>
-            ))}
+            {quizes.length != 0
+              ? quizes.map((quiz) => (
+                  <div className="recent-quiz-template" key={quiz._id}>
+                    <h3>{quiz.quizId.title}</h3>
+                    <p>
+                      <span>Attempt:</span> {quiz.attempt}
+                    </p>
+                    <p>
+                      <span>Attempted On:</span> {formatDate(quiz.createdAt)}
+                    </p>
+                    <div className="btns">
+                      <Link to={`/quiz/certificate/${quiz._id}`}>
+                        <button>Show Certificate</button>
+                      </Link>
+                      <button onClick={() => handleShareBtn(quiz._id)}>
+                        Share
+                      </button>
+                    </div>
+                  </div>
+                ))
+              : "No quiz has been taken yet."}
           </div>
         </div>
+        {msg && <Notification msg={msg} setMsg={setMsg} />}
       </div>
     </section>
   );

@@ -40,8 +40,13 @@ export default function TakeQuizTest({ quiz }) {
         }
       );
       const data = await response.json();
+      console.log(data);
       if (!data.success) {
-        throw new Error(data.message);
+        const message =
+          data.status !== 403
+            ? data.message
+            : "You have to login to submit the quiz.";
+        throw new Error(message);
       }
       setMsg(data.message);
       setTimeout(() => {

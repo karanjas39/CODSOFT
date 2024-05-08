@@ -50,8 +50,10 @@ export default function Quizcertificate() {
             successfully completed <span>'{quiz.title}'</span> quiz created by{" "}
             <span>{quiz.createdBy.name}</span> with an overall score of{" "}
             <span>
-              {quiz.score.reduce((acc, cur) => acc + cur, 0) / quiz.attempt}/
-              {quiz.total}
+              {(
+                quiz.score.reduce((acc, cur) => acc + cur, 0) / quiz.attempt
+              ).toFixed(2)}{" "}
+              out of {quiz.total}
             </span>{" "}
             in <span>{quiz.attempt}</span> attempts.
           </p>

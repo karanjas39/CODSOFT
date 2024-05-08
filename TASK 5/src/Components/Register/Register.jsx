@@ -48,9 +48,8 @@ export default function Login() {
         },
       });
       const data = await response.json();
-      console.log(data);
       if (!data.success) {
-        throw new Error(data.message);
+        throw new Error("You can not register at this moment.");
       }
       setMsg(data.message);
       setEmail("");

@@ -378,6 +378,7 @@ async function getUserAllQuiz(req, res) {
         success: false,
         status: 404,
         message: "No quiz is created yet.",
+        quizes: [],
       });
     }
     res.send({

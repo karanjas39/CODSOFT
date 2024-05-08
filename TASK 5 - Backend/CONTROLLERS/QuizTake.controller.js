@@ -166,7 +166,7 @@ async function getTakenQuiz(req, res) {
 
     const isUser = await User.findById(id);
 
-    if (!isUser || !isUser.verified || isUser.role !== "taker") {
+    if (!isUser || isUser.role !== "taker") {
       return res.send({
         success: false,
         status: 403,
@@ -186,6 +186,7 @@ async function getTakenQuiz(req, res) {
         success: false,
         status: 404,
         message: "No quiz is taken yet.",
+        quizes: [],
       });
     }
 

@@ -69,15 +69,17 @@ export default function DashboardCreator() {
         <div className="user-created-quiz">
           <h2>Recently Created Quiz</h2>
           <div>
-            {quizes.map((quiz) => (
-              <RecentlyCreatedQuizes
-                key={quiz._id}
-                title={quiz.title}
-                description={quiz.description}
-                createdAt={quiz.createdAt}
-                _id={quiz._id}
-              />
-            ))}
+            {quizes.length != 0
+              ? quizes.map((quiz) => (
+                  <RecentlyCreatedQuizes
+                    key={quiz._id}
+                    title={quiz.title}
+                    description={quiz.description}
+                    createdAt={quiz.createdAt}
+                    _id={quiz._id}
+                  />
+                ))
+              : "No quiz has been created yet."}
           </div>
         </div>
       </div>

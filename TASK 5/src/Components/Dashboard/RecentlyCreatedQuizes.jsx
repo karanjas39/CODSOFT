@@ -1,7 +1,51 @@
 import "../../Styles/dashboard.scss";
+import PopUp from "../PopUp/PopUp";
 import formatDate from "../../Utils/formatDate";
+import { useEffect, useState } from "react";
+import Notification from "../Notification/Notification";
+import { useNavigate } from "react-router-dom";
 
 function RecentlyCreatedQuizes({ title, description, _id, createdAt }) {
+  const [ans, setAns] = useState(null);
+  const [ques, setQues] = useState("");
+  const [msg, setMsg] = useState("");
+  const navigate = useNavigate();
+
+  async function handleQuizDelete() {
+    setQues("Do you want to delete this quiz?");
+  }
+
+  useEffect(() => {
+    async function deleteQuiz() {
+      const response = await fetch(
+        "http://127.0.0.1:8080/v1/api/user/quiz/delete",
+        {
+          method: "POST",
+          body: JSON.stringify({ _id }),
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+          },
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      if (data.success) {
+        setQues("");
+        setMsg("Yout Quiz is deleted successfully.");
+        navigate("/dashboard/creator");
+      }
+    }
+
+    if (ans != null) {
+      if (ans) {
+        deleteQuiz();
+      } else {
+        setQues("");
+      }
+    }
+  }, [ans]);
+
   return (
     <div className="recentlyCreatedQuizTemplate">
       <h3>{title}</h3>
@@ -12,8 +56,10 @@ function RecentlyCreatedQuizes({ title, description, _id, createdAt }) {
       </p>
       <p className="date">Created On: {formatDate(createdAt)}</p>
       <div className="btns">
-        <button>Delete</button>
+        <button onClick={handleQuizDelete}>Delete</button>
       </div>
+      {ques && <PopUp setAns={setAns} ques={ques} />}
+      {msg && <Notification msg={msg} setMsg={setMsg} />}
     </div>
   );
 }
