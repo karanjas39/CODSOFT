@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
+import { TiThMenu } from "react-icons/ti";
 import "../../Styles/navBar.scss";
+import { useState } from "react";
 
 function NavBar({ links = [], btns = [] }) {
+  const [isOpen, setIsOpen] = useState(false);
   function handleBtnClick(e) {
     if (e.target.textContent == "Logout") {
       sessionStorage.removeItem("token");
@@ -13,7 +16,13 @@ function NavBar({ links = [], btns = [] }) {
       <Link to="/">
         <h2>Quizeo</h2>
       </Link>
-      <div>
+      <p className="nav-btn" onClick={() => setIsOpen(true)}>
+        <TiThMenu />
+      </p>
+      <div className={isOpen ? "links open" : "links"}>
+        <button className="cancel-btn" onClick={() => setIsOpen(false)}>
+          Close
+        </button>
         {links &&
           links.map((link, i) =>
             (sessionStorage.getItem("token") && link.text === "Dashboard") ||

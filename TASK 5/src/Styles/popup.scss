@@ -37,3 +37,11 @@
     }
   }
 }
+
+@media screen and (max-width: "786px") {
+  .popup-outer {
+    > .popup-container {
+      width: 80% !important;
+    }
+  }
+}

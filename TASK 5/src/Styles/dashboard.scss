@@ -105,3 +105,18 @@
     }
   }
 }
+
+@media screen and (max-width: "786px") {
+  .dashboard {
+    > div {
+      > .user-card {
+        > div {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 5px;
+          margin-top: 10px;
+        }
+      }
+    }
+  }
+}

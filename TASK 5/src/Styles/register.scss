@@ -41,3 +41,11 @@
     }
   }
 }
+
+@media screen and (max-width: "786px") {
+  .register {
+    > .register-form {
+      width: 80%;
+    }
+  }
+}

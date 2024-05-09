@@ -39,15 +39,17 @@ function McqQuestionOption({
         value={newOption}
         onChange={onOptionChange}
       />
-      <p
-        onClick={handleSetCorrectAnswer}
-        className={correctAnswer === id ? "correctans" : ""}
-      >
-        <SiTicktick />
-      </p>
-      <p onClick={handleNewOptionDelete}>
-        <MdDelete />
-      </p>
+      <div>
+        <p
+          onClick={handleSetCorrectAnswer}
+          className={correctAnswer === id ? "correctans" : ""}
+        >
+          <SiTicktick />
+        </p>
+        <p onClick={handleNewOptionDelete}>
+          <MdDelete />
+        </p>
+      </div>
     </div>
   );
 }

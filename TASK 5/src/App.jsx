@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import NavBar from "./Components/NavBar/NavBar";
 import "./Styles/app.scss";
+import Footer from "./Components/Footer/Footer";
 
 const links = [
   {
@@ -47,6 +48,7 @@ function App() {
           <li></li>
         </ul>
       </section>
+      <Footer />
     </>
   );
 }

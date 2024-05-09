@@ -48,3 +48,11 @@
     }
   }
 }
+
+@media screen and (max-width: "786px") {
+  .login {
+    > .login-form {
+      width: 80%;
+    }
+  }
+}
