@@ -6,7 +6,7 @@ import { MdEmail } from "react-icons/md";
 import { FaCertificate, FaUser } from "react-icons/fa";
 import "../../Styles/dashboard.scss";
 import Notification from "../Notification/Notification";
-import { backend_url } from "../../constant";
+import { backend_url, frontend_url } from "../../constant";
 
 const links = [{ text: "Take Quiz", to: "/quiz/all" }];
 
@@ -45,7 +45,7 @@ export default function DashboardTaker() {
   }, [user]);
 
   function handleShareBtn(id) {
-    const url = `http://localhost:5173/quiz/certificate/${id}`;
+    const url = `${frontend_url}/quiz/certificate/${id}`;
     const textarea = document.createElement("textarea");
     textarea.value = url;
     document.body.appendChild(textarea);
