@@ -10,4 +10,4 @@ This repository includes all the assignments I've been assigned during my Codsof
 ### Task 5 (Frontend) : <a href="https://quizeo-codsoft.vercel.app/" target="_blank">https://quizeo-codsoft.vercel.app/</a>
 ### Task 5 (Backend) : <a href="https://codsoft-quizeo.onrender.com/" target="_blank">https://codsoft-quizeo.onrender.com</a>
 
-#### <https://codsoft-quizeo.onrender.comiew the Project Tasks</a>
+### <a href="reactjs.pdf" target="_blank">Click here to view all the tasks.</a>
