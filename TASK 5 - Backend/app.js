@@ -30,7 +30,7 @@ app.route("/").get((req, res) => {
 });
 
 // ROUTES
-app.use("/v1/api/user", cors(corsOptions), userRouter);
+app.use("/v1/api/user", cors(), userRouter);
 
 // UNHANDLED ROUTES
 app.route("*").all((req, res) => {
