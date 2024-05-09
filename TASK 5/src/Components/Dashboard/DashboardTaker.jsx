@@ -6,6 +6,7 @@ import { MdEmail } from "react-icons/md";
 import { FaCertificate, FaUser } from "react-icons/fa";
 import "../../Styles/dashboard.scss";
 import Notification from "../Notification/Notification";
+import { backend_url } from "../../constant";
 
 const links = [{ text: "Take Quiz", to: "/quiz/all" }];
 
@@ -115,14 +116,14 @@ export async function getTakerDetail() {
   if (!token) {
     throw new Error("Unauthorized access.");
   }
-  const response1 = fetch("http://127.0.0.1:8080/v1/api/user", {
+  const response1 = fetch(`${backend_url}/v1/api/user`, {
     method: "GET",
     headers: {
       "Content-type": "application/json",
       Authorization: `Bearer ${token}`,
     },
   });
-  const response2 = fetch("http://127.0.0.1:8080/v1/api/user/quiz/take/all", {
+  const response2 = fetch(`${backend_url}/v1/api/user/quiz/take/all`, {
     method: "GET",
     headers: {
       "Content-type": "application/json",

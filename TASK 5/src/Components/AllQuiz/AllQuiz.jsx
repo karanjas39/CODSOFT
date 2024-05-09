@@ -2,6 +2,7 @@ import { useLoaderData } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
 import "../../Styles/allQuiz.scss";
 import QuizCard from "./QuizCard";
+import { backend_url } from "../../constant";
 
 const links = [
   {
@@ -35,15 +36,12 @@ export default function AllQuiz() {
 }
 
 export async function getAllQuizesInMain() {
-  const response = await fetch(
-    "http://127.0.0.1:8080/v1/api/user/quiz/all/user",
-    {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-      },
-    }
-  );
+  const response = await fetch(`${backend_url}/v1/api/user/quiz/all/user`, {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json",
+    },
+  });
   const data = await response.json();
   if (!data.success) {
     throw new Error(data.message);

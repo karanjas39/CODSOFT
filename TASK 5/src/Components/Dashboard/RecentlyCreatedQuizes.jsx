@@ -4,6 +4,7 @@ import formatDate from "../../Utils/formatDate";
 import { useEffect, useState } from "react";
 import Notification from "../Notification/Notification";
 import { useNavigate } from "react-router-dom";
+import { backend_url } from "../../constant";
 
 function RecentlyCreatedQuizes({ title, description, _id, createdAt }) {
   const [ans, setAns] = useState(null);
@@ -17,17 +18,14 @@ function RecentlyCreatedQuizes({ title, description, _id, createdAt }) {
 
   useEffect(() => {
     async function deleteQuiz() {
-      const response = await fetch(
-        "http://127.0.0.1:8080/v1/api/user/quiz/delete",
-        {
-          method: "POST",
-          body: JSON.stringify({ _id }),
-          headers: {
-            "Content-type": "application/json",
-            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-          },
-        }
-      );
+      const response = await fetch(`${backend_url}/v1/api/user/quiz/delete`, {
+        method: "POST",
+        body: JSON.stringify({ _id }),
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
+        },
+      });
       const data = await response.json();
       console.log(data);
       if (data.success) {

@@ -2,6 +2,7 @@ import { useLoaderData } from "react-router-dom";
 import NavBar from "../NavBar/NavBar";
 import "../../Styles/takeQuiz.scss";
 import TakeQuizTest from "./TakeQuizTest";
+import { backend_url } from "../../constant";
 
 const links = [{ text: "Home", to: "/dashboard/taker" }];
 
@@ -26,7 +27,7 @@ export async function getTakerDetailAndReadyQuiz({ params }) {
   const token = sessionStorage.getItem("token");
   if (!token) throw new Error("You have to login to take quiz.");
 
-  const userDetail = fetch("http://127.0.0.1:8080/v1/api/user", {
+  const userDetail = fetch(`${backend_url}/v1/api/user`, {
     method: "GET",
     headers: {
       "Content-type": "application/json",

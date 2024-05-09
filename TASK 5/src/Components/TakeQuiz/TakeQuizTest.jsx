@@ -3,6 +3,7 @@ import formatDate from "../../Utils/formatDate";
 import TakeQuizQuestion from "./TakeQuizQuestion";
 import { useNavigate } from "react-router-dom";
 import Notification from "../Notification/Notification";
+import { backend_url } from "../../constant";
 
 export default function TakeQuizTest({ quiz }) {
   const newMcqSet = quiz.mcq.map((ques) => {
@@ -28,17 +29,14 @@ export default function TakeQuizTest({ quiz }) {
     }
     setLoading(true);
     try {
-      const response = await fetch(
-        "http://127.0.0.1:8080/v1/api/user/quiz/take",
-        {
-          method: "POST",
-          body: JSON.stringify({ quizId: quiz._id, mcq }),
-          headers: {
-            "Content-type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${backend_url}/v1/api/user/quiz/take`, {
+        method: "POST",
+        body: JSON.stringify({ quizId: quiz._id, mcq }),
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const data = await response.json();
       console.log(data);
       if (!data.success) {

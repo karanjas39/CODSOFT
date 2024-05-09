@@ -6,6 +6,7 @@ import { MdEmail } from "react-icons/md";
 import { FaCertificate, FaUser } from "react-icons/fa";
 import "../../Styles/dashboard.scss";
 import RecentlyCreatedQuizes from "./RecentlyCreatedQuizes";
+import { backend_url } from "../../constant";
 
 const links = [{ text: "Create Quiz", to: "/quiz/create" }];
 
@@ -92,7 +93,7 @@ export async function getCreatorDetail() {
   if (!token) {
     throw new Error("Unauthorized access.");
   }
-  const response1 = await fetch("http://127.0.0.1:8080/v1/api/user", {
+  const response1 = await fetch(`${backend_url}/v1/api/user`, {
     method: "GET",
     headers: {
       "Content-type": "application/json",
@@ -100,7 +101,7 @@ export async function getCreatorDetail() {
     },
   });
 
-  const response2 = await fetch("http://127.0.0.1:8080/v1/api/user/quiz/all", {
+  const response2 = await fetch(`${backend_url}/v1/api/user/quiz/all`, {
     method: "GET",
     headers: {
       "Content-type": "application/json",

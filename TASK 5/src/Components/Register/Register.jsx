@@ -3,6 +3,7 @@ import NavBar from "../NavBar/NavBar";
 import Notification from "../Notification/Notification";
 import { useNavigate } from "react-router-dom";
 import "../../Styles/register.scss";
+import { backend_url } from "../../constant";
 
 const links = [
   {
@@ -40,7 +41,7 @@ export default function Login() {
 
     setLoading(true);
     try {
-      const response = await fetch("http://127.0.0.1:8080/v1/api/user/create", {
+      const response = await fetch(`${backend_url}/v1/api/user/create`, {
         method: "POST",
         body: JSON.stringify({ email, password, role, name }),
         headers: {

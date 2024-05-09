@@ -3,6 +3,7 @@ import Confetti from "react-confetti";
 import "../../Styles/certificate.scss";
 import { useEffect, useState } from "react";
 import NavBar from "../NavBar/NavBar";
+import { backend_url } from "../../constant";
 
 const links = [
   {
@@ -70,7 +71,7 @@ export default function Quizcertificate() {
 
 export async function getQuizCertificate({ params }) {
   const response = await fetch(
-    `http://127.0.0.1:8080/v1/api/user/quiz/take/info?_id=${params.cid}`,
+    `${backend_url}/v1/api/user/quiz/take/info?_id=${params.cid}`,
     {
       method: "GET",
       headers: {

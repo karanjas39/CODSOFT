@@ -6,6 +6,7 @@ import McqForm from "./McqForm";
 import McqListedInList from "./McqListedInList";
 import Notification from "../Notification/Notification";
 import { useNavigate } from "react-router-dom";
+import { backend_url } from "../../constant";
 
 const links = [
   {
@@ -73,23 +74,20 @@ function CreateQuiz() {
       if (!token) {
         navigate("/login");
       }
-      const response = await fetch(
-        "http://127.0.0.1:8080/v1/api/user/quiz/create",
-        {
-          method: "POST",
-          body: JSON.stringify({
-            mcq: mcqs,
-            title,
-            description,
-            difficulty,
-            passScore: parseInt(passScore),
-          }),
-          headers: {
-            "Content-type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${backend_url}/v1/api/user/quiz/create`, {
+        method: "POST",
+        body: JSON.stringify({
+          mcq: mcqs,
+          title,
+          description,
+          difficulty,
+          passScore: parseInt(passScore),
+        }),
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const data = await response.json();
       if (!data.success) {
         throw new Error(data.message);
