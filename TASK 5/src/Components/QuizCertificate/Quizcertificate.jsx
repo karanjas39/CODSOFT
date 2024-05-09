@@ -3,7 +3,7 @@ import Confetti from "react-confetti";
 import "../../Styles/certificate.scss";
 import { useEffect, useState } from "react";
 import NavBar from "../NavBar/NavBar";
-import { backend_url } from "../../constant";
+import { backend_url, frontend_url } from "../../constant";
 
 const links = [
   {
@@ -39,8 +39,8 @@ export default function Quizcertificate() {
             <p>
               Certificate url:{" "}
               <a
-                href={`localhost:5173/quiz/certificate/${cid}`}
-              >{`localhost:5173/quiz/certificate/${cid}`}</a>
+                href={`${frontend_url}/quiz/certificate/${cid}`}
+              >{`${frontend_url}/quiz/certificate/${cid}`}</a>
             </p>
           </div>
         </div>
