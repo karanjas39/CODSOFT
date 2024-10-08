@@ -13,7 +13,7 @@ function RecentBlogs() {
       try {
         const token = sessionStorage.getItem("token");
         const response = await fetch(
-          "https://codsoft-x5ou.onrender.com/v1/api/user/blog/all",
+          "http://127.0.0.1:8081/v1/api/user/blog/all",
           {
             method: "GET",
             headers: {

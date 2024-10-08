@@ -25,7 +25,7 @@ export default function BlogView() {
 
 export async function getBlog({ params }) {
   const response = await fetch(
-    `https://codsoft-x5ou.onrender.com/v1/api/blog/details?_id=${params.bid}`,
+    `http://127.0.0.1:8081/v1/api/blog/details?_id=${params.bid}`,
     {
       method: "GET",
       headers: {

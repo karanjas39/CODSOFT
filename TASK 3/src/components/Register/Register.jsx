@@ -14,16 +14,13 @@ function Register() {
   async function handleRegister(e) {
     e.preventDefault();
     try {
-      const response = await fetch(
-        "https://codsoft-x5ou.onrender.com/v1/api/user/create",
-        {
-          method: "POST",
-          body: JSON.stringify({ email, password, name, username }),
-          headers: {
-            "Content-type": "application/json",
-          },
-        }
-      );
+      const response = await fetch("http://127.0.0.1:8081/v1/api/user/create", {
+        method: "POST",
+        body: JSON.stringify({ email, password, name, username }),
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
       const data = await response.json();
       if (data.success) {
         setEmail("");

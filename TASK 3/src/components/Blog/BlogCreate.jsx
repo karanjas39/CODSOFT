@@ -54,17 +54,14 @@ export async function handleCreateBlog({ request }) {
   }
 
   try {
-    const response = await fetch(
-      "https://codsoft-x5ou.onrender.com/v1/api/blog/create",
-      {
-        method: "POST",
-        body: JSON.stringify(submission),
-        headers: {
-          "Content-type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const response = await fetch("http://127.0.0.1:8081/v1/api/blog/create", {
+      method: "POST",
+      body: JSON.stringify(submission),
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
     const data = await response.json();
     if (data.success == true) {
       return redirect("/dashboard/user");

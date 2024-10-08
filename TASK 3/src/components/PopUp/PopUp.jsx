@@ -7,17 +7,14 @@ function PopUp({ setIsPopUp, setBlogs, toDeleteBlog }) {
     }
 
     const token = sessionStorage.getItem("token");
-    const response = await fetch(
-      "https://codsoft-x5ou.onrender.com/v1/api/blog/delete",
-      {
-        method: "POST",
-        body: JSON.stringify({ _id: toDeleteBlog }),
-        headers: {
-          authorization: `Bearer ${token}`,
-          "Content-type": "application/json",
-        },
-      }
-    );
+    const response = await fetch("http://127.0.0.1:8081/v1/api/blog/delete", {
+      method: "POST",
+      body: JSON.stringify({ _id: toDeleteBlog }),
+      headers: {
+        authorization: `Bearer ${token}`,
+        "Content-type": "application/json",
+      },
+    });
     const data = await response.json();
     if (data.success == true) {
       return setBlogs((blogs) =>
