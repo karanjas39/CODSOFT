@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "../../Styles/register.scss";
 
 import Header from "../Header/Header";
+import { backend_url } from "../../constants";
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -14,7 +15,7 @@ function Register() {
   async function handleRegister(e) {
     e.preventDefault();
     try {
-      const response = await fetch("http://127.0.0.1:8081/v1/api/user/create", {
+      const response = await fetch(`${backend_url}/v1/api/user/create`, {
         method: "POST",
         body: JSON.stringify({ email, password, name, username }),
         headers: {

@@ -1,6 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 import "../../Styles/blog.scss";
 import { formatDate } from "../Dashboard/Details";
+import { backend_url } from "../../constants";
 
 export default function BlogView() {
   const { blog } = useLoaderData();
@@ -25,7 +26,7 @@ export default function BlogView() {
 
 export async function getBlog({ params }) {
   const response = await fetch(
-    `http://127.0.0.1:8081/v1/api/blog/details?_id=${params.bid}`,
+    `${backend_url}/v1/api/blog/details?_id=${params.bid}`,
     {
       method: "GET",
       headers: {

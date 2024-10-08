@@ -1,3 +1,4 @@
+import { backend_url } from "../../constants";
 import "../../Styles/popup.scss";
 
 function PopUp({ setIsPopUp, setBlogs, toDeleteBlog }) {
@@ -7,7 +8,7 @@ function PopUp({ setIsPopUp, setBlogs, toDeleteBlog }) {
     }
 
     const token = sessionStorage.getItem("token");
-    const response = await fetch("http://127.0.0.1:8081/v1/api/blog/delete", {
+    const response = await fetch(`${backend_url}/v1/api/blog/delete`, {
       method: "POST",
       body: JSON.stringify({ _id: toDeleteBlog }),
       headers: {

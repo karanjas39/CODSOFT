@@ -1,5 +1,6 @@
 import { useLoaderData } from "react-router-dom";
 import RecentBlogs from "../Blog/RecentBlogs";
+import { backend_url } from "../../constants";
 
 export function formatDate(dateData) {
   try {
@@ -76,7 +77,7 @@ export default Details;
 
 export const getDetails = async ({ params }) => {
   const token = sessionStorage.getItem("token");
-  const response = await fetch("http://127.0.0.1:8081/v1/api/user/details", {
+  const response = await fetch(`${backend_url}/v1/api/user/details`, {
     method: "GET",
     headers: {
       authorization: `Bearer ${token}`,

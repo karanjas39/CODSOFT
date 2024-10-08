@@ -1,6 +1,7 @@
 import "../../Styles/blog.scss";
 import { useLoaderData } from "react-router-dom";
 import BlogMain from "./BlogMain";
+import { backend_url } from "../../constants";
 
 export default function BlogList() {
   const blogs = useLoaderData();
@@ -25,7 +26,7 @@ export default function BlogList() {
 }
 
 export async function getAllBlogs() {
-  const response = await fetch(`http://127.0.0.1:8081/v1/api/blog/all`, {
+  const response = await fetch(`${backend_url}/v1/api/blog/all`, {
     method: "GET",
     headers: {
       "COntent-type": "application/json",

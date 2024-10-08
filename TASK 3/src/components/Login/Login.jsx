@@ -1,3 +1,4 @@
+import { backend_url } from "../../constants";
 import "../../Styles/login.scss";
 
 import Header from "../Header/Header";
@@ -68,7 +69,7 @@ export async function handleLogin({ request }) {
   }
 
   try {
-    const response = await fetch("http://127.0.0.1:8081/v1/api/user/login", {
+    const response = await fetch(`${backend_url}/v1/api/user/login`, {
       method: "POST",
       body: JSON.stringify(bodyData),
       headers: {

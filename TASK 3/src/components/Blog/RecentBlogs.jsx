@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "../../Styles/blog.scss";
 import Blog from "./Blog";
 import PopUp from "../PopUp/PopUp";
+import { backend_url } from "../../constants";
 
 function RecentBlogs() {
   const [blogs, setBlogs] = useState([]);
@@ -12,15 +13,12 @@ function RecentBlogs() {
     async function getUserBlogs() {
       try {
         const token = sessionStorage.getItem("token");
-        const response = await fetch(
-          "http://127.0.0.1:8081/v1/api/user/blog/all",
-          {
-            method: "GET",
-            headers: {
-              authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await fetch(`${backend_url}/v1/api/user/blog/all`, {
+          method: "GET",
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        });
         const data = await response.json();
         if (data.success == true) {
           setBlogs(data.blogs);

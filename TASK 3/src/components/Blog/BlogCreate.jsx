@@ -1,3 +1,4 @@
+import { backend_url } from "../../constants";
 import "../../Styles/create-blog.scss";
 import { Form, redirect, useActionData } from "react-router-dom";
 
@@ -54,7 +55,7 @@ export async function handleCreateBlog({ request }) {
   }
 
   try {
-    const response = await fetch("http://127.0.0.1:8081/v1/api/blog/create", {
+    const response = await fetch(`${backend_url}/v1/api/blog/create`, {
       method: "POST",
       body: JSON.stringify(submission),
       headers: {

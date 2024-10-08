@@ -6,6 +6,7 @@ import {
   redirect,
 } from "react-router-dom";
 import "../../Styles/blog.scss";
+import { backend_url } from "../../constants";
 
 export default function BLogUpdate() {
   const data = useActionData();
@@ -62,7 +63,7 @@ export async function blogUpdateInit({ request, params }) {
   }
 
   try {
-    const response = await fetch("http://127.0.0.1:8081/v1/api/blog/update", {
+    const response = await fetch(`${backend_url}/v1/api/blog/update`, {
       method: "POST",
       body: JSON.stringify(submission),
       headers: {
