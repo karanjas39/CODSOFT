@@ -35,7 +35,7 @@ export async function getTakerDetailAndReadyQuiz({ params }) {
     },
   });
   const quizDetail = fetch(
-    `http://127.0.0.1:8080/v1/api/user/quiz/detail?_id=${params.qid}`,
+    `https://quizeo-codsoft.vercel.app/v1/api/user/quiz/detail?_id=${params.qid}`,
     {
       method: "GET",
       headers: {
